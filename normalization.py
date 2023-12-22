@@ -7,7 +7,6 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
-import fasttext
 
 
 class sentence_vectorize:

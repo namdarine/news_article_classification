@@ -1,16 +1,15 @@
-import os
 import requests
 import csv
 
-existing_csv_path = '/Users/namgyulee/Personal_Project/news_data.csv'
+existing_csv_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/news_data.csv'
 
 
 new_data_url = (
     'https://newsapi.org/v2/everything?'
     'domains=reuters.com,chicagotribune.com,wsj.com&'
-    'from=2023-12-07&to=2023-12-08&'
+    'from=2023-12-11&to=2023-12-12&'
     'language=en&'
-    'pagesize=16&'
+    'pagesize=7&'
     'apiKey=3c8c00c811e74114bf0774a1c6e34e41'
 )
 
@@ -23,7 +22,7 @@ if response.status_code == 200:
     with open(existing_csv_path, 'a', newline='', encoding='utf-8') as csv_file:
         csv_writer = csv.writer(csv_file)
 
-        for row_number, article in enumerate(new_data, start=985):
+        for row_number, article in enumerate(new_data, start=994):
             title = article.get('title', '')
             publisher = article.get('source', {}).get('name', 'N/A')
             author = article.get('author', '')
@@ -42,7 +41,7 @@ else:
 url = ('https://newsapi.org/v2/everything?'
        'domains=reuters.com,chicagotribune.com,wsj.com&'
        'language=en&'
-       'from=2023-11-17&to=2023-11-18&'
+       'from=2023-11-22&to=2023-11-23&'
        'apiKey=3c8c00c811e74114bf0774a1c6e34e41')
 
 response = requests.get(url)
@@ -56,7 +55,7 @@ if response.status_code == 200:
     articles = data.get('articles', [])
 
     # Specify the full path and file name for the CSV file
-    csv_path = '/Users/namgyulee/Personal_Project/news_data.csv'
+    csv_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/news_data.csv'
 
     # Open the CSV file in write mode
     with open(csv_path, 'w', newline='', encoding='utf-8') as csv_file:
@@ -81,5 +80,4 @@ if response.status_code == 200:
     print(f'Data has been successfully written to {csv_path}')
 else:
     print(f'Error: {response.status_code}')
-    
 """

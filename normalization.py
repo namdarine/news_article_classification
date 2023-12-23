@@ -101,10 +101,17 @@ title_test_set = test_set['Title']
 des_test_set = test_set['Description']
 author_test_set = test_set['Author'].astype(str)
 
+# Tokenize and vectorize Train set
 sentence_vectorizer = sentence_vectorize(title_train_set, des_train_set, author_train_set)
 sentence_vectorizer.train_model()
 train_sentence_vectors = sentence_vectorizer.get_sentence_vectors()
 sentence_vectorizer.save_vectors_to_csv('train_sentence_vectors.csv')
+
+# Tokenize and vectorize Test set
+test_sentence_vectorizer = sentence_vectorize(title_test_set, des_test_set, author_test_set)
+test_sentence_vectorizer.train_model()
+train_sentence_vectors = test_sentence_vectorizer.get_sentence_vectors()
+test_sentence_vectorizer.save_vectors_to_csv('test_sentence_vectors.csv')
 
 
 # Test Code before put functions in the class

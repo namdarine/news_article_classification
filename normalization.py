@@ -40,7 +40,43 @@ class sentence_vectorize:
         # Train the model
         self.model = Word2Vec(sentences=all_tokenized, vector_size=100, window=5, min_count=1, workers=4)
         self.word_vectors = {word: self.model.wv[word] for word in self.model.wv.index_to_key}
+
+    def get_sentence_vectors(self):
+        if self.model is None:
+            raise ValueError("Model not trained. Call train_model() first")
         
+        # Get sentence vectors for each sentence
+        sentence_vectors = []
+    
+        for tokens in [self.tokenize_text(text) for text in self.title + self.description + self.author]:
+            sentence_vector = np.zeros(self.model.vector_size)  # Initialize a vector of zeros
+    
+            for word in tokens:
+                if word in self.word_vectors and word in self.vectorizer.vocabulary_:
+                    index_in_vocab = self.vectorizer.vocabulary_[word]
+                    tfidf_value = self.vectorizer.transform([word]).toarray()[0, index_in_vocab]
+                    vector = tfidf_value * self.word_vectors[word]  # Use TF-IDF value as weight
+                    sentence_vector += vector
+    
+            sentence_vectors.append(sentence_vector)
+    
+        return sentence_vectors
+
+
+    def save_vectors_to_csv(self, output_csv):
+        sentence_vectors = self.get_sentence_vectors()
+    
+        df_output = pd.DataFrame({
+            'Original Title Text': list(self.title),
+            'Title Sentence Vector': [vector[0] for vector in sentence_vectors],
+            'Original Description Text': list(self.description),
+            'Description Sentence Vector': [vector[1] for vector in sentence_vectors],
+            'Original Author Text': list(self.author),
+            'Author Sentence Vector': [vector[2] for vector in sentence_vectors]
+        })
+        df_output.to_csv(output_csv, index=True)
+
+"""
     def get_sentence_vectors(self):
         if self.model is None:
             raise ValueError("Model not trained. Call train_model() first")
@@ -63,19 +99,8 @@ class sentence_vectorize:
                 sentence_vectors[-1] = np.mean(sentence_vectors[-1], axis=0)
         
         return sentence_vectors[0] + sentence_vectors[1] + sentence_vectors[2]
-    
-    def save_vectors_to_csv(self, output_csv):
-        sentence_vectors = self.get_sentence_vectors()
-        
-        df_output = pd.DataFrame({
-            'Original Title Text': list(self.title),
-            'Title Sentence Vector': sentence_vectors[0],
-            'Original Description Text': list(self.description),
-            'Description Sentence Vector': sentence_vectors[1],
-            'Original Author Text': list(self.author),
-            'Author Sentence Vector': sentence_vectors[2]
-        })
-        df_output.to_csv(output_csv, index=True)
+"""    
+
 
 
 csv_file_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/news_data.csv'

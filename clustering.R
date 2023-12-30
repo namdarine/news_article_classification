@@ -2,14 +2,15 @@ setwd("/Users/namgyulee/Personal_Project/News_Article_Classification/")
 
 library(cluster)
 library(factoextra)
+library(fpc)
 
-df <- read.csv("train_sentence_vectors.csv", header=T, sep=",")
+df <- read.csv("normalized.csv", header=T, sep=",")
 df <- (df[, c("Title.Sentence.Vector", "Description.Sentence.Vector", "Author.Sentence.Vector")])
 
 df.scaled <- scale(df)
 
-k <- kmeans(df, centers=3) 
-k.scaled <- kmeans(df.scaled, centers=3)
+k <- kmeans(df, centers=5) 
+k.scaled <- kmeans(df.scaled, centers=5)
 
 fviz_cluster(k, data=df, main="Unscaled clusters") 
 fviz_cluster(k.scaled, data=df.scaled, main="Scaled clusters") 
@@ -24,4 +25,4 @@ fviz_nbclust(df, kmeans, method = "wss", k.max = 15)
 fviz_nbclust(df, kmeans, method = "silhouette", k.max = 15)
 
 # Visualize Clustering with center 2
-fviz_cluster(kmeans(df, centers=2, nstart=25), data=df)
+fviz_cluster(kmeans(df, centers=5, nstart=25), data=df)

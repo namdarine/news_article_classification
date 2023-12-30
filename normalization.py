@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -114,29 +113,13 @@ description = df['Description']
 author = df['Author'].astype(str)
 
 
-train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
-
-# Split Title and Description
-# They have same articles
-title_train_set = train_set['Title']
-des_train_set = train_set['Description']
-author_train_set = train_set['Author'].astype(str)
-
-title_test_set = test_set['Title']
-des_test_set = test_set['Description']
-author_test_set = test_set['Author'].astype(str)
+#train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
 
 # Tokenize and vectorize Train set
-sentence_vectorizer = sentence_vectorize(title_train_set, des_train_set, author_train_set)
+sentence_vectorizer = sentence_vectorize(title, description, author)
 sentence_vectorizer.train_model()
 train_sentence_vectors = sentence_vectorizer.get_sentence_vectors()
-sentence_vectorizer.save_vectors_to_csv('train_sentence_vectors.csv')
-
-# Tokenize and vectorize Test set
-test_sentence_vectorizer = sentence_vectorize(title_test_set, des_test_set, author_test_set)
-test_sentence_vectorizer.train_model()
-train_sentence_vectors = test_sentence_vectorizer.get_sentence_vectors()
-test_sentence_vectorizer.save_vectors_to_csv('test_sentence_vectors.csv')
+sentence_vectorizer.save_vectors_to_csv('normalized.csv')
 
 
 # Test Code before put functions in the class

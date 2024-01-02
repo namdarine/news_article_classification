@@ -10,7 +10,6 @@ new_data_url = (
     'from=2023-12-11&to=2023-12-12&'
     'language=en&'
     'pagesize=7&'
-    'apiKey=3c8c00c811e74114bf0774a1c6e34e41'
 )
 
 response = requests.get(new_data_url)

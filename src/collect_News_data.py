@@ -1,5 +1,10 @@
 import requests
 import csv
+from function import get_API_key
+
+key_file = '/Users/namgyulee/Personal_Project/News_Article_Classification/api-key.txt'
+api_key_instance = get_API_key(key_file, 2)
+api_key = api_key_instance.get_api_key(2)
 
 existing_csv_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/news_data.csv'
 
@@ -10,6 +15,7 @@ new_data_url = (
     'from=2023-12-11&to=2023-12-12&'
     'language=en&'
     'pagesize=7&'
+    f'apiKey={api_key}'
 )
 
 response = requests.get(new_data_url)
@@ -41,7 +47,7 @@ url = ('https://newsapi.org/v2/everything?'
        'domains=reuters.com,chicagotribune.com,wsj.com&'
        'language=en&'
        'from=2023-11-22&to=2023-11-23&'
-       'apiKey=3c8c00c811e74114bf0774a1c6e34e41')
+       f'apiKey={api_key}')
 
 response = requests.get(url)
 

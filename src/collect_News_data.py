@@ -41,7 +41,7 @@ url = ('https://newsapi.org/v2/everything?'
        'domains=reuters.com,chicagotribune.com,wsj.com&'
        'language=en&'
        'from=2023-11-22&to=2023-11-23&'
-       'apiKey=3c8c00c811e74114bf0774a1c6e34e41')
+       'apiKey=')
 
 response = requests.get(url)
 

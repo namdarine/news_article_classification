@@ -49,6 +49,7 @@ url = ('https://newsapi.org/v2/everything?'
        'from=2023-11-22&to=2023-11-23&'
        f'apiKey={api_key}')
 
+
 response = requests.get(url)
 
 # Check if the request was successful (status code 200)

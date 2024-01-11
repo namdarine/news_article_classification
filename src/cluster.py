@@ -19,7 +19,7 @@ num_clusters = 5
 kmeans = KMeans(n_clusters=num_clusters, random_state=42)
 kmeans.fit(df.vector)
 
-# Evaluate the clustering performance using metrics (optional)
+# Evaluate the clustering performance using metrics
 silhouette_score = metrics.silhouette_score(df.vector, kmeans.labels_)
 print(f'Everything Silhouette Score: {silhouette_score}')
 
@@ -31,7 +31,7 @@ num_clusters = 5
 kmeans = KMeans(n_clusters=num_clusters, random_state=42)
 kmeans.fit(df.vector1)
 
-# Evaluate the clustering performance using metrics (optional)
+# Evaluate the clustering performance using metrics
 silhouette_score1 = metrics.silhouette_score(df.vector1, kmeans.labels_)
 print(f'Title - Description Silhouette Score: {silhouette_score1}')
 
@@ -66,7 +66,7 @@ cmap = plt.cm.get_cmap('viridis')  # Use a visually appealing colormap
 colors = cmap(kmeans.labels_.astype(float) / num_clusters)
 
 # Create scatter plot with clear labeling:
-plt.figure(figsize=(8, 6))  # Adjust figure size for better visibility
+plt.figure(figsize=(8, 6))
 plt.scatter(X_visualize.iloc[:, 0], X_visualize.iloc[:, 1], c=colors, s=50)
 
 # Add informative plot title and axis labels:

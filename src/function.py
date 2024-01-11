@@ -6,6 +6,9 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
+from transformers import OpenAIGPTTokenizer
+from openai import OpenAI
+import os
 
 class get_API_key:
     def __init__(self, filename, n):
@@ -88,3 +91,59 @@ class sentence_vectorize:
             'Author Sentence Vector': [vector[2] for vector in sentence_vectors]
         })
         df_output.to_csv(output_csv, index=True) 
+
+class gpt_Model:
+    def __init__(self, head, model, api_key):
+        self.head = head
+        self.api_key = api_key
+        self.tokenizer = OpenAIGPTTokenizer.from_pretrained('openai-gpt')
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+        self.model = model
+    """    
+    def tokenizing_text(self):
+        if isinstance(self.head, str):
+            # If the input is a single string
+            token = self.tokenizer(self.head, return_tensors="pt", padding=True, truncation=True)
+        elif isinstance(self.head, list):
+            # If the input is a list of strings
+            token = self.tokenizer(self.head, return_tensors="pt", padding=True, truncation=True, is_split_into_words=True)
+        elif isinstance(self.head, list) and all(isinstance(item, list) for item in self.head):
+            # If the input is a list of lists of strings
+            token = self.tokenizer(self.head, return_tensors="pt", padding=True, truncation=True, is_split_into_words=True)
+        else:
+            raise ValueError("Invalid input type. Must be a string, list of strings, or list of lists of strings.")
+        
+        return token
+    """
+    def get_embedding(self):
+        client = OpenAI(
+              api_key=os.environ[f'self.api_key'],  # this is also the default, it can be omitted
+            )
+       
+        text = self.head.replace("\n", " ")
+        return client.embeddings.create(input = [text], model=self.model).data[0].embedding
+
+"""
+    def embedding_text(self):
+        token_head = self.tokenizing_text()
+    
+        if isinstance(self.head, list):
+            input_text = " ".join(self.head)
+        else:
+            input_text = self.head
+    
+        client = OpenAI(
+              api_key=os.environ[self.api_key],  # this is also the default, it can be omitted
+            )
+        
+        response = openai.Completion.create(
+            engine="text-embedding-ada-002",
+            prompt=input_text,
+            temperature=0.5
+        )
+        embedding = response['choices'][0]['model_output']['embeddings']
+    
+        return embedding
+    
+"""

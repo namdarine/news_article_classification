@@ -99,3 +99,34 @@ for cluster_num in range(5):
     cluster_articles = df[df['Cluster'] == cluster_num]['Original Title Text']
     print(f"\nCluster {cluster_num} Articles:")
     print(cluster_articles.head(5))
+    
+    
+# Predict with new dataset 
+new_df = pd.read_csv("/new_normalized.csv")
+new_df.vector = new_df.loc[:, ['Title Sentence Vector', 'Description Sentence Vector']]
+kmeans.fit(new_df.vector)
+predict = kmeans.predict(new_df.vector)
+print(predict)
+
+import seaborn as sns
+
+new_data_clusters = predict
+sns.scatterplot(x=new_df.vector['Title Sentence Vector'], y=new_df.vector['Description Sentence Vector'], hue=new_data_clusters, palette='viridis')
+plt.title('Cluster Assignments for New Data')
+plt.show()
+
+filename = "new_kmeans_visualization.png"
+plt.savefig(filename)
+print(f"Plot saved successfully as '{filename}'")
+
+new_df2 = pd.read_csv("/new_data.csv")
+
+new_df2['k-means Cluster'] = predict
+filename = "clustered_new_data.csv"
+df.to_csv(filename, index=False)
+new_df2.to_csv("clustered_new_news_data.csv", index=False)
+
+
+
+
+

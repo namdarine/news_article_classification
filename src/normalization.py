@@ -1,7 +1,7 @@
 import pandas as pd
 from function import sentence_vectorize
 
-csv_file_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/Data/news_data.csv'
+"""csv_file_path = '/Users/namgyulee/Personal_Project/News_Article_Classification/Data/news_data.csv'
 
 df = pd.read_csv(csv_file_path)
 
@@ -15,8 +15,20 @@ author = df['Author'].astype(str)
 sentence_vectorizer = sentence_vectorize(title, description, author)
 sentence_vectorizer.train_model()
 train_sentence_vectors = sentence_vectorizer.get_sentence_vectors()
-sentence_vectorizer.save_vectors_to_csv('normalized.csv')
+sentence_vectorizer.save_vectors_to_csv('normalized.csv')"""
 
+new_df = pd.read_csv("/Users/namgyulee/Personal_Project/News_Article_Classification/Data/new_data.csv")
+new_df['Description'] = new_df['Description'].fillna('')
+
+title = new_df['Title']
+description = new_df['Description']
+author = new_df['Author'].astype(str)
+
+# Tokenize and vectorize Train set
+sentence_vectorizer = sentence_vectorize(title, description, author)
+sentence_vectorizer.train_model()
+train_sentence_vectors = sentence_vectorizer.get_sentence_vectors()
+sentence_vectorizer.save_vectors_to_csv('/Users/namgyulee/Personal_Project/News_Article_Classification/Data/new_normalized.csv')
 
 # Test Code before put functions in the class
 """

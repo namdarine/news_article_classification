@@ -73,6 +73,7 @@ def get_embedding(text):
 
 
 title["embedding"] = get_embedding(title)
+des["embedding"] = get_embedding(des)
 
 
 #des_embedding = get_embedding(des.tolist())  # Convert Series to list

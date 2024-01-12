@@ -30,8 +30,15 @@ model = Sequential([
     ])
 
 # Train model with the train set
-model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(train_set, train_set, epochs=100, batch_size=128)
 
 # Evaluate the model with the test set
-print("Accuracy:", model.evaluate(test_set, test_set, verbose=0)[1])
+loss, accuracy = model.evaluate(test_set, test_set)
+print(f'Test Loss: {loss}, Test Accuracy: {accuracy}')
+
+new_df = pd.read_csv("/Users/namgyulee/Personal_Project/News_Article_Classification/Data/new_data.csv")
+new_df = new_df.loc[:, ["Title Sentence Vector", 'Description Senetence Vector', 'Author Sentence Vector']]
+
+predicts = model.predict(new_df)
+print(predicts)

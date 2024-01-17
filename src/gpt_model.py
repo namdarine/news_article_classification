@@ -9,14 +9,10 @@ from sklearn.decomposition import PCA
 import torch
 import matplotlib.pyplot as plt
 from openai import OpenAI
-#import os
-#import nltk
-#from nltk.corpus import stopwords
-#from nltk.tokenize import word_tokenize
-#import string
-#import re
-#from ast import literal_eval
 import json
+import pickle
+#from utils.embeddings_utils import get_embedding
+#from openai import EmbeddingOpenAI
 
 df = pd.read_csv('/Users/namgyulee/Personal_Project/News_Article_Classification/Data/news_data.csv')
 df['Description'] = df['Description'].fillna('')
@@ -25,6 +21,13 @@ title = df['Title']
 des = df['Description']
 author = df['Author']
 
+title = title.tolist()
+des = des.tolist()
+author = author.tolist()
+
+title = json.dumps(title)
+des = json.dumps(des)
+author = json.dumps(author)
 
 # Train GPT using 
 key_file = '/Users/namgyulee/Personal_Project/News_Article_Classification/api-key.txt'
@@ -35,61 +38,35 @@ client = OpenAI(
     api_key = API_key
     )
 
-"""test = [['hahahah'], ['Apple'], ['Banana'], ['club'], ['start']]
-tesst = []
-for i in range(len(test)):
-    response = client.embeddings.create(
-        input=test[i],
-        model="text-embedding-ada-002",
-        encoding_format=float
-    )
-    tesst.append(i, response.data[0].embedding)
-print(tesst)
-"""
-#def get_embedding(text: str, model="text-embedding-ada-002") -> list[float]:
-#    return client.embeddings.create(input=[text], model=model)["data"][0]["embedding"]
-
-#def get_embedding(text, model="text-embedding-ada-002"):
-#   return client.embeddings.create(input = [text], model=model).data[0].embedding
-"""embeddings = []
-for chunk in des:
-    response = client.embeddings.create(input=chunk, model="text-embedding-ada-002")
-    embeddings.append(response['data'][0]['embedding'])
-
-final_embedding = np.concatenate(embeddings)
-
-print(len(final_embedding))"""
-
-
-def get_embedding(text):
-    response = client.embeddings.create(
-        model="text-embedding-ada-002",
-        input=[text],
-        encoding_format=float
-    )
-    embedding = response.data[0].embedding.tolist()
-
+def get_embedding(text: str, model="text-embedding-ada-002") -> list[float]:
+    response = client.embeddings.create(input=[text], model=model)
+    embedding = response.data[0].embedding
     return embedding
 
+def get_embeddings(text_list, model="text-embedding-ada-002"):
+    embeddings = []
+    for text_chunk in text_list:
+        embedding = get_embedding(text_chunk, model=model)
+        embeddings.append(embedding)
+    return embeddings
 
-title["embedding"] = get_embedding(title)
-des["embedding"] = get_embedding(des)
+chunk_size = 8192
 
+title_chunks = [title[i:i+chunk_size] for i in range(0, len(title), chunk_size)]
+des_chunks = [des[i:i+chunk_size] for i in range(0, len(des), chunk_size)]
+author_chunks = [author[i:i+chunk_size] for i in range(0, len(author), chunk_size)]
 
-#des_embedding = get_embedding(des.tolist())  # Convert Series to list
+# Get embeddings for each chunk
+title_embeddings = get_embeddings(title_chunks)
+des_embeddings = get_embeddings(des_chunks)
+author_embeddings = get_embeddings(author_chunks)
 
-# Print the first 3 embeddings
-#print(des_embedding[:3])
+# Concatenate embeddings into lists or arrays
+embedded_title = [emb for sublist in title_embeddings for emb in sublist]
+embedded_des = [emb for sublist in des_embeddings for emb in sublist]
+embedded_author = [emb for sublist in author_embeddings for emb in sublist]
+    
 
-#title['Title ada embedding'] = []
-#des['Description ada embedding'] = []
-#author['Author ada embedding'] = []
-
-
-#for index, row in title.iterrows():
-#    title.loc[index, 'Title ada embedding'] = get_embedding(row['Title'])
-#des['Description ada embedding'] = des.apply(lambda x: get_embedding(x))
-#author['Author ada embedding'] = author.apply(lambda x: get_embedding(x))
 """
 df_output = pd.DataFrame({
     'Original Title Text': list(title),

@@ -1,17 +1,11 @@
-import re
 import tqdm
 import keras
 import numpy as np
 import pandas as pd
 import google.generativeai as genai
-import google.ai.generativelanguage as glm
-from tqdm.auto import tqdm
 from google.api_core import retry
-import seaborn as sns
 import matplotlib.pyplot as plt
 from keras import layers
-from matplotlib.ticker import MaxNLocator
-from sklearn.datasets import fetch_20newsgroups
 import sklearn.metrics as skmetrics
 from sklearn.model_selection import train_test_split
 from function import get_API_key

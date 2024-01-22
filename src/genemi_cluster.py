@@ -3,15 +3,11 @@ import pandas as pd
 from function import get_API_key
 import matplotlib.pyplot as plt
 import google.generativeai as genai
-import google.ai.generativelanguage as glm
 from tqdm.auto import tqdm
 from google.api_core import retry
-from sklearn.datasets import fetch_20newsgroups
 from sklearn.cluster import KMeans
 from sklearn import metrics
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.manifold import TSNE
-import seaborn as sns
 
 key_file = '/Users/namgyulee/Personal_Project/News_Article_Classification/api-key.txt'
 api_key_instance = get_API_key(key_file, 8)

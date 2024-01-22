@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn import metrics
 
-df = pd.read_csv("/normalized.csv")
+df = pd.read_csv("/Users/namgyulee/Personal_Project/News_Article_Classification/Data/normalized.csv")
 df.vector = df.loc[:, ['Title Sentence Vector', 'Description Sentence Vector', 'Author Sentence Vector']]
 
 num_clusters = 5

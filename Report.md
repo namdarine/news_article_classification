@@ -48,7 +48,7 @@ Compare four different combinations using the Silhouette Score.
 
 Due to the higher value of the silhouette score, use the Title and Description combination for k-Means clustering. 
 
-![Cluster visualization)(/img/cluster_visualization.png)
+![Cluster visualization](/img/cluster_visualization.png)
 
 #### The result of five of each cluster 
 - Cluster 0 (164 articles) - Mixed (Environment, Politics, Society) 

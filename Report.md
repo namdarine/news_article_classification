@@ -48,7 +48,7 @@ Compare four different combinations using the Silhouette Score.
 
 Due to the higher value of the silhouette score, use the Title and Description combination for k-Means clustering. 
 
-![[cluster_visualization.png]]
+![Cluster visualization)(/img/cluster_visualization.png)
 
 #### The result of five of each cluster 
 - Cluster 0 (164 articles) - Mixed (Environment, Politics, Society) 
@@ -99,7 +99,7 @@ Compare four different combinations using the Silhouette Score.
 
 Due to the higher value of the silhouette score, use the Title and Description combination for k-Means clustering. 
 
-![[GPT_kmeans_visualization.png]]
+![GPT k-means visualization](/img/GPT_kmeans_visualization.png)
 
 #### The result of five of each cluster 
 - Cluster 0 Articles (167) - Mixed (Politic, Society, Environment):
@@ -147,7 +147,7 @@ Compare four different combinations using the Silhouette Score.
 
 Due to the higher value of the silhouette score, use the Title and Description combination for k-Means clustering. 
 
-![[Genemi_kmeans_Visulalization.png]]
+![Genemi k-means visualization](/img/Genemi_kmeans_Visulalization.png)
 
 #### The result of five of each cluster 
 - Cluster 0 Articles (165) - Society :
@@ -187,7 +187,7 @@ Due to the higher value of the silhouette score, use the Title and Description c
 
 #### Result of Genemi classification
 Result: loss: 0.5434 - accuracy: 0.8100 {'loss': 0.5433962345123291, 'accuracy': 0.8100000023841858}
-![[Genemi_Classifier_Performance.png]]
+![Genemi Classifier Performance](/img/Genemi_Classifier_Performance.png)
 
 ## Conclusion
 Compared to GPT and Genemi, Genemi is more user-friendly. Genemi is easy to use and there are up-to-date guides. OpenAI has a guide for using it, but it's outdated and requires some preprocessing. The result of the clustered data is more accurate when using the Genemi model than k-means clustering.

@@ -4,9 +4,9 @@
 Dec 17, 2023 ~ Jan 15, 2024
 
 ## Abstract
-In my university coursework, I embarked on implementing k-means clustering and an Artificial Neural Network (ANN) model using data I collected myself. During the process, I learned about a newly released model called Genemi on Google. Intrigued, I decided to compare k-means, Genemi, and GPT, all of which I had learned during class, using my collected data.
+In my university coursework, I embarked on implementing k-means clustering and an Artificial Neural Network (ANN) model using data I collected myself. During the process, I learned about a newly released model called Gemini on Google. Intrigued, I decided to compare k-means, Gemini, and GPT, all of which I had learned during class, using my collected data.
 
-Surprisingly, the Genemi model exhibited higher accuracy compared to k-means and GPT. This project report aims to provide insights into the performance of these three models in the context of text analysis, shedding light on the advancements brought by Genemi.
+Surprisingly, the Gemini model exhibited higher accuracy compared to k-means and GPT. This project report aims to provide insights into the performance of these three models in the context of text analysis, shedding light on the advancements brought by Gemini.
 
 ## Introduction
 ### Why I Built a Classification Model with Unsupervised Learning
@@ -14,8 +14,8 @@ The ability to classify things is a core skill in AI. Every new AI model has it,
 
 For this project, I compared three different models:
 1.  **k-Means Clustering:** This is a classic algorithm from the Scikit-learn library. I used it to group similar data points and visualize the results with Matplotlib.
-2. **Genemi:** This is a brand new Large Language Model from Google.
-3. **GPT from OpenAI:** This model is older than Genemi, but it's still powerful. 
+2. **Gemini:** This is a brand new Large Language Model from Google.
+3. **GPT from OpenAI:** This model is older than Gemini, but it's still powerful. 
 
 I was curious to see how these different models would perform with unsupervised learning. I hope this project shows my understanding of AI concepts and my ability to apply them to real-world problems.
 
@@ -34,7 +34,7 @@ I applied NLTK for tokenization and normalization. Word2Vec provided word vector
 #### 3.2 GPT
 Could does not need to be normalized in the data set, but, it needs the data set in JSON format. While converting to JSON format, the length of the data set increases by 1,000 to 90,978. Therefore, normalization of the data set before training the model.
 
-#### 3.3 Genemi
+#### 3.3 Gemini
 Normalization of the data set Does not need to be done before training the model. 
 
 ## Result
@@ -137,7 +137,7 @@ Due to the higher value of the silhouette score, use the Title and Description c
 	12    Man, 30, seriously wounded overnight in shooting on Far South Side, police say
 	17    2 fatally wounded in separate shootings Wednesday evening on South Side, Chicago police said
 
-### 3. Genemi
+### 3. Gemini
 There are five clusters, Politics, Society, World, Environment, and Sports. 
 Compare four different combinations using the Silhouette Score.
  - Everything (Title, Description, Author) : 0.24500106275081635
@@ -147,7 +147,7 @@ Compare four different combinations using the Silhouette Score.
 
 Due to the higher value of the silhouette score, use the Title and Description combination for k-Means clustering. 
 
-![Genemi k-means visualization](/img/Genemi_kmeans_Visulalization.png)
+![Gemini k-means visualization](/img/Gemini_kmeans_Visulalization.png)
 
 #### The result of five of each cluster 
 - Cluster 0 Articles (165) - Society :
@@ -185,11 +185,11 @@ Due to the higher value of the silhouette score, use the Title and Description c
 	12   Man, 30, seriously wounded overnight in shooting on Far South Side, police say
 	13    Thanksgiving forecast: Sunny conditions expected with highs in mid 40s
 
-#### Result of Genemi classification
+#### Result of Gemini classification
 Result: loss: 0.5434 - accuracy: 0.8100 {'loss': 0.5433962345123291, 'accuracy': 0.8100000023841858}
-![Genemi Classifier Performance](/img/Genemi_Classifier_Performance.png)
+![Gemini Classifier Performance](/img/Gemini_Classifier_Performance.png)
 
 ## Conclusion
-Compared to GPT and Genemi, Genemi is more user-friendly. Genemi is easy to use and there are up-to-date guides. OpenAI has a guide for using it, but it's outdated and requires some preprocessing. The result of the clustered data is more accurate when using the Genemi model than k-means clustering.
+Compared to GPT and Gemini, Gemini is more user-friendly. Gemini is easy to use and there are up-to-date guides. OpenAI has a guide for using it, but it's outdated and requires some preprocessing. The result of the clustered data is more accurate when using the Gemini model than k-means clustering.
 These training models were unsupervised learning; this makes the accuracy of models lower. 
-Additionally done ANN classification and Genemi classification. Also, Genemi shows more accuracy than the ANN model.
+Additionally done ANN classification and Gemini classification. Also, Gemini shows more accuracy than the ANN model.
